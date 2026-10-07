@@ -396,7 +396,7 @@ h1 span + span{animation-delay:.09s}
         <span>一籠一籠，手工做，慢慢蒸<br>一口一口，把香港帶回來<br>@gongmadim2025</span>
       </div>
     </article>
-    <p class="shot">長按卡片或按下面的按鈕存成限動圖，記得 tag @gongmadim2025</p>
+    <p class="shot" id="shot">長按卡片或按下面的按鈕存成限動圖，記得 tag @gongmadim2025</p>
     <div class="actions">
       <a class="go" href="https://www.instagram.com/gongmadim2025/" target="_blank" rel="noopener">追蹤港媽點 IG
         <svg viewBox="0 0 26 20" aria-hidden="true"><path d="M2 10h20M14 3l8 7-8 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -836,6 +836,8 @@ async function storyCanvas(id){
 
 // 結果一出來就先在背景畫好限動圖，按鈕按下去才能立刻叫出分享選單（手機只在「按下的當下」允許分享）
 let storyURL="", storyFile=null, storyJob=null, storyRound=0;
+// LINE 內建瀏覽器長按圖片沒反應（2026-10-07 使用者實測），提示改成只講按鈕
+if(/\bLine\//i.test(navigator.userAgent)) $("shot").textContent = "按下面的按鈕存成限動圖，記得 tag @gongmadim2025";
 // 每次出結果就換一個回合編號；舊回合的工作晚回來，一律丟掉，不會蓋到新結果
 function resetStory(){ storyRound++; storyURL=""; storyFile=null; storyJob=null; const cs=$("cardSave"); cs.hidden=true; cs.removeAttribute("src"); closeSaveView(false); }
 function prepareStory(id){
